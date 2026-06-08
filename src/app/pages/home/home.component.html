@@ -1,0 +1,174 @@
+<div class="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+
+  <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 border-b border-slate-800">
+    <div class="max-w-3xl mx-auto px-6 py-24 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold text-white leading-[1.15] mb-5 tracking-tight">
+        A Nova Lógica<br>
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">da Reforma Tributária</span>
+      </h1>
+      <p class="text-base md:text-lg text-slate-400 leading-relaxed max-w-xl mx-auto">
+        Um guia prático para desenvolvedores sobre as mudanças arquiteturais da RTC, abrangendo sistemas de faturamento, emissão de notas e fluxos de pagamentos.
+      </p>
+    </div>
+  </div>
+
+  <div class="max-w-3xl mx-auto px-6 py-16 space-y-16">
+
+    <section class="space-y-6">
+      <div>
+        <span class="section-label text-orange-500">01: Novo Paradigma</span>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">O Fim de uma Era</h2>
+      </div>
+
+      <div class="flex flex-wrap gap-2">
+        @for (imposto of impostosExtintos; track imposto) {
+          <span class="line-through text-red-400 text-sm font-mono bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 px-3 py-1 rounded-md">{{ imposto }}</span>
+        }
+        <span class="text-gray-300 dark:text-slate-600 self-center mx-1">→</span>
+        <span class="text-emerald-700 dark:text-emerald-300 text-sm font-mono bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/50 px-3 py-1 rounded-md font-semibold">CBS</span>
+        <span class="text-blue-700 dark:text-blue-300 text-sm font-mono bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50 px-3 py-1 rounded-md font-semibold">IBS</span>
+      </div>
+
+      <div class="space-y-4 text-gray-600 dark:text-slate-300 leading-relaxed">
+        <p>
+          O sistema tributário nacional exigia regras complexas e tabelas extensas para lidar com cinco impostos sobre o consumo: PIS e COFINS (federal), IPI (federal), ICMS (estadual) e ISS (municipal).
+        </p>
+        <p>
+          No lugar dessa pluralidade, surge o <strong class="text-gray-900 dark:text-white">IVA Dual</strong>. A <strong class="text-gray-900 dark:text-white">CBS</strong> substitui o PIS e a COFINS no âmbito federal. O <strong class="text-gray-900 dark:text-white">IBS</strong> unifica o ICMS e o ISS para estados e municípios. Ambos incidem sobre o mesmo fato gerador, mudando apenas a destinação bancária dos recursos arrecadados.
+        </p>
+        <p>
+          Existe ainda o <strong class="text-gray-900 dark:text-white">Imposto Seletivo (IS)</strong>, também chamado de imposto extrafiscal. Onera produtos nocivos à saúde ou ao meio ambiente, cumprindo o papel extrafiscal que anteriormente cabia ao IPI.
+        </p>
+      </div>
+    </section>
+
+    <hr class="border-gray-200 dark:border-slate-800">
+
+    <section class="space-y-6">
+      <div>
+        <span class="section-label text-indigo-500">02: Matemática Transparente</span>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Cálculo "Por Fora"</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6 items-start">
+        <div class="space-y-4 text-gray-600 dark:text-slate-300 leading-relaxed">
+          <p>
+            O modelo antigo ("por dentro") embutia o imposto na própria base de cálculo, gerando um efeito em cascata no qual o ICMS incidia sobre si mesmo.
+          </p>
+          <p>
+            Com o IVA Dual, o Brasil adota o padrão internacional "por fora" (VAT-Exclusive): o preço é limpo e os impostos são adicionados de forma explícita. O cupom ao lado usa as alíquotas da fase sandbox de 2026, de acordo com o regulamento oficial da reforma.
+          </p>
+        </div>
+
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-5 font-mono text-sm">
+          <p class="text-slate-500 text-xs mb-4 font-sans uppercase tracking-wider">cupom_fiscal.json</p>
+          <div class="space-y-3">
+            <div class="flex justify-between text-slate-400">
+              <span>"valorBruto":</span>
+              <span class="text-white">R$ 100,00</span>
+            </div>
+            <div class="flex justify-between text-pink-400 pl-3 border-l border-pink-900">
+              <span>"ibs" (0,1%):</span>
+              <span>+ R$ 0,10</span>
+            </div>
+            <div class="flex justify-between text-indigo-400 pl-3 border-l border-indigo-900">
+              <span>"cbs" (0,9%):</span>
+              <span>+ R$ 0,90</span>
+            </div>
+            <div class="border-t border-slate-800 pt-3 flex justify-between font-semibold text-emerald-400">
+              <span>"totalFaturado":</span>
+              <span>R$ 101,00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-gray-200 dark:border-slate-800">
+
+    <section class="space-y-6">
+      <div>
+        <span class="section-label text-teal-600 dark:text-teal-400">03: Endereçamento Fiscal</span>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Tributação no Destino</h2>
+      </div>
+
+      <div class="space-y-4 text-gray-600 dark:text-slate-300 leading-relaxed">
+        <p>
+          Antes, o imposto pertencia ao estado de origem da mercadoria, o que historicamente esvaziou a receita de estados sem grandes polos industriais. Com o Princípio do Destino, o IBS passa a pertencer ao município e estado onde a mercadoria é consumida.
+        </p>
+        <p>
+          Para o código, o CEP e o código IBGE do endereço de entrega se tornam campos obrigatórios e validados. Um cadastro sem endereço completo bloqueia a emissão do documento fiscal.
+        </p>
+      </div>
+
+      <div class="inline-flex items-center gap-4 bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 rounded-xl px-5 py-4">
+        <div class="text-center">
+          <p class="text-xs text-gray-400 uppercase tracking-wide mb-1">Remetente</p>
+          <p class="font-bold text-gray-900 dark:text-white text-lg">SP</p>
+        </div>
+        <div class="text-gray-300 dark:text-slate-700 text-xl">→</div>
+        <div class="text-center">
+          <p class="text-xs text-teal-600 dark:text-teal-400 uppercase tracking-wide mb-1">Destino validado</p>
+          <p class="font-bold text-gray-900 dark:text-white text-lg">PB</p>
+          <p class="text-xs font-mono text-gray-400 mt-0.5">CEP 58000-000</p>
+        </div>
+        <div class="border-l border-gray-200 dark:border-slate-700 pl-4">
+          <p class="text-xs font-medium text-emerald-600 dark:text-emerald-400">Receita → Paraíba ✓</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-gray-200 dark:border-slate-800">
+
+    <section class="space-y-6">
+      <div>
+        <span class="section-label text-blue-600 dark:text-blue-400">04: Fim da Guerra Fiscal</span>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Regras Universais</h2>
+      </div>
+
+      <div class="space-y-4 text-gray-600 dark:text-slate-300 leading-relaxed">
+        <p>
+          Antes, cada estado e município criava suas próprias isenções, tais como ISS a 2% em determinados municípios ou isenções específicas de ICMS. Para um sistema nacional, manter a matriz tributária por estado era complexo e ineficiente.
+        </p>
+        <p>
+          A nova regulamentação encerra isso: estados e municípios perdem a autonomia para criar isenções isoladas. Qualquer redução, como os 60% estabelecidos para serviços de saúde e educação, só existe via Lei Complementar federal, sendo aplicada igualmente em todo o território nacional.
+        </p>
+        <div class="callout-blue">
+          Isso elimina a necessidade de condicionais complexas para cada unidade federativa. Uma regra para medicamentos aplica-se identicamente em qualquer parte do país.
+        </div>
+      </div>
+    </section>
+
+    <hr class="border-gray-200 dark:border-slate-800">
+
+    <section class="space-y-5">
+      <p class="text-sm text-gray-500 dark:text-slate-500 font-medium">Continue no guia:</p>
+      <div class="grid sm:grid-cols-2 gap-3">
+        @for (card of cards; track card.rota) {
+          <a [routerLink]="['/', card.rota]"
+             class="group nav-card"
+             [class.sm:col-span-2]="card.destaque">
+            <p class="nav-card-label">{{ card.label }}</p>
+            <h3 class="nav-card-title">{{ card.titulo }}</h3>
+            <p class="nav-card-desc">{{ card.descricao }}</p>
+          </a>
+        }
+      </div>
+    </section>
+
+  </div>
+
+  <div class="fixed bottom-6 right-6 z-50 transition-all duration-300"
+       [class.opacity-100]="exibirBotaoTopo"
+       [class.opacity-0]="!exibirBotaoTopo"
+       [class.pointer-events-auto]="exibirBotaoTopo"
+       [class.pointer-events-none]="!exibirBotaoTopo">
+    <button (click)="voltarAoTopo()" type="button" aria-label="Voltar ao topo"
+            class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-700 text-gray-500 dark:text-gray-400 p-2.5 rounded-lg shadow-md hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+    </button>
+  </div>
+
+</div>

@@ -1,0 +1,56 @@
+<div class="prose-page">
+
+  <div class="page-heading">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Impacto nos Cadastros</h2>
+    <p class="text-gray-500 dark:text-slate-400">
+      O que muda na modelagem de dados com a migração do princípio da origem para o princípio do destino.
+    </p>
+  </div>
+
+  <section class="space-y-5">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Emissor: o toggle do Simples Nacional</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      Empresas do Simples Nacional que realizam operações destinadas a pessoas jurídicas (B2B) podem optar por recolher o IBS e a CBS separadamente do DAS. Isso viabiliza o repasse integral do crédito tributário aos adquirentes corporativos, preservando a competitividade no mercado.
+    </p>
+
+    <div class="code-block">
+      <div class="code-block-header">
+        <div class="code-block-dots">
+          <div class="w-3 h-3 rounded-full bg-red-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500/70"></div>
+        </div>
+        <span class="text-xs font-mono text-gray-500">EmissorConfigDto.json</span>
+      </div>
+      <pre class="code-block-pre"><code><span class="text-gray-600">&#123;</span>
+  <span class="text-green-400">"idEmissor"</span><span class="text-gray-500">:</span>             <span class="text-yellow-300">"uuid-1234-abcd"</span><span class="text-gray-500">,</span>
+  <span class="text-green-400">"cnpj"</span><span class="text-gray-500">:</span>                 <span class="text-yellow-300">"12345678000199"</span><span class="text-gray-500">,</span>
+  <span class="text-green-400">"optanteSimplesNacional"</span><span class="text-gray-500">:</span> <span class="text-purple-400">true</span><span class="text-gray-500">,</span>
+  <span class="text-green-400">"recolheIbsCbsPorFora"</span><span class="text-gray-500">:</span>   <span class="text-purple-400">true</span>
+<span class="text-gray-600">&#125;</span></code></pre>
+    </div>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Clientes: a relevância do enquadramento tributário</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      O CEP e o código IBGE do endereço de entrega passam a ser campos obrigatórios e validados, deixando de ser meramente opcionais. Um cadastro incompleto impede a validação do documento fiscal.
+    </p>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      Os sistemas de gestão precisam identificar se o cliente atua em caráter B2B (gerando direitos a créditos de IBS) ou B2C (consumidor final). Essa indicação deve ser armazenada em um campo estruturado no cadastro, em vez de depender de inferências dinâmicas.
+    </p>
+  </section>
+
+  <section class="space-y-5">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Período híbrido: manutenção das colunas legadas</h3>
+
+    <div class="callout-red">
+      <strong>Não execute</strong> comandos como <code class="bg-red-100 dark:bg-red-900/50 px-1 rounded text-xs">DROP COLUMN</code> ou <code class="bg-red-100 dark:bg-red-900/50 px-1 rounded text-xs">DELETE</code> nas tabelas do ICMS, PIS ou COFINS. A transição se estende até 2032, período durante o qual os dois regimes tributários coexistem de forma integrada.
+    </div>
+
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A arquitetura recomendada para a transição é a modelagem por tabelas segregadas. É prudente manter a entidade de produto intacta e criar relacionamentos ou extensões exclusivas para os parâmetros do novo IVA. O sistema escolherá dinamicamente a tributação com base na data de emissão do documento.
+    </p>
+  </section>
+
+</div>

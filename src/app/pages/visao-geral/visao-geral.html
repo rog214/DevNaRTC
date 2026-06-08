@@ -1,0 +1,132 @@
+<div class="space-y-8 animate-fade-in pb-12">
+  <div class="border-b border-gray-200 pb-5">
+    <h2 class="text-3xl font-extrabold tracking-tight text-gray-900">Conteúdo Programático da Reforma</h2>
+    <p class="mt-2 max-w-4xl text-lg text-gray-500">
+      Mapeamento completo dos conceitos da Reforma Tributária traduzido de "Juridiquês" para "Termos de Engenharia de Software".
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+    <section class="bg-white dark:bg-slate-800 dark:text-gray-300 dark:border-slate-700 rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col transition-all hover:shadow-md hover:border-blue-300">
+      <div class="bg-blue-600 px-5 py-3 border-b border-blue-700">
+        <h3 class="text-lg font-bold text-white flex items-center">
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+          Módulo 1: Fundamentos (IVA Dual)
+        </h3>
+      </div>
+      <div class="p-5 space-y-4 flex-1">
+        <p class="text-sm text-gray-600">A espinha dorsal normativa. O Brasil desativa cinco "endpoints" legados de imposto e os consolida em três novos canais principais de arrecadação.</p>
+
+        <ul class="space-y-3">
+          <li class="bg-blue-50 p-3 rounded-md border border-blue-100">
+            <strong class="text-blue-900 text-sm">CBS (A Contribuição Federal)</strong>
+            <p class="text-xs text-blue-700 mt-1">Substitui PIS e COFINS. Analogia: Uma única API consumida pela União Federal.</p>
+          </li>
+          <li class="bg-blue-50 p-3 rounded-md border border-blue-100">
+            <strong class="text-blue-900 text-sm">IBS (A Carga Subnacional)</strong>
+            <p class="text-xs text-blue-700 mt-1">Acaba a guerra fiscal de ICMS (Estados) e ISS (Municípios). Fundidos num imposto único roteado para governos locais.</p>
+          </li>
+          <li class="bg-amber-50 p-3 rounded-md border border-amber-100">
+            <strong class="text-amber-900 text-sm">Imposto Seletivo (O 'Taxa Pecado')</strong>
+            <p class="text-xs text-amber-700 mt-1">Substitui/altera parte do IPI. Adiciona uma tarifa punitiva (<code class="text-xs bg-amber-200 px-1 rounded">fatorExtra</code>) para cigarros, álcool ou poluentes.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="bg-white dark:bg-slate-800 dark:text-gray-300 dark:border-slate-700 rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col transition-all hover:shadow-md hover:border-emerald-300">
+      <div class="bg-emerald-600 px-5 py-3 border-b border-emerald-700">
+        <h3 class="text-lg font-bold text-white flex items-center">
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+          Módulo 2: Princípios e Estrutura
+        </h3>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <p class="text-sm text-gray-600 mb-4">Como a matemática fiscal (Modelagem da Lógica de Negócios) vai rodar nos bastidores das nossas classes e cadastros.</p>
+
+        <div class="flex-1 space-y-3">
+          <div>
+            <span class="text-emerald-800 font-bold text-sm">Não-cumulatividade plena:</span>
+            <p class="text-xs text-gray-500">Se a Indústria pagou R$ 10 de imposto, o Varejista pode creditar exatamente esses R$ 10 como desconto. A contabilidade do software precisará manter logs exatos das entradas (<code class="bg-gray-100 text-teal-600 px-1 rounded">CreditoInput</code>) contra saídas (<code class="bg-gray-100 text-red-600 px-1 rounded">DebitoOutput</code>).</p>
+          </div>
+          <div>
+            <span class="text-emerald-800 font-bold text-sm">Tributação no Destino:</span>
+            <p class="text-xs text-gray-500">A alíquota de quem compra (IP Destino) vence a alíquota de quem vende (IP Origem). Exige validação severa de endereços (CEP/IBGE).</p>
+          </div>
+          <div class="bg-gray-50 p-3 rounded border border-gray-200 mt-2">
+            <span class="text-gray-800 font-bold text-sm block mb-1">Cesta Básica & Alíquotas:</span>
+            <pre class="text-[11px] text-pink-500 font-mono bg-white p-2 border border-gray-100"><code ngNonBindable>// O preço flutua via RegimeFiscal
+if (prod.IsCestaBasica) return preco * 0.00m;
+if (prod.IsSaude) return preco * 0.40m; // -60% off
+return preco * 1.00m; // Aliquota Cheia</code></pre>
+          </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button [routerLink]="['/impacto-cadastros']" class="text-xs bg-emerald-100 text-emerald-800 px-3 py-1.5 rounded-full font-medium hover:bg-emerald-200 transition-colors inline-block text-center w-full">Impacto Técnico em Bancos de Dados →</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white dark:bg-slate-800 dark:text-gray-300 dark:border-slate-700 rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col transition-all hover:shadow-md hover:border-purple-300">
+      <div class="bg-purple-600 px-5 py-3 border-b border-purple-700">
+        <h3 class="text-lg font-bold text-white flex items-center">
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+          Módulo 3: Gestão & Fluxo de Dados
+        </h3>
+      </div>
+      <div class="p-5 space-y-4 flex-1 flex flex-col">
+        <p class="text-sm text-gray-600">A camada de middleware / mensageria e como as transações HTTPS deverão fluir para o governo.</p>
+
+        <div class="flex-1 space-y-4">
+          <div class="border-l-2 border-purple-400 pl-3">
+            <h4 class="text-purple-800 font-bold text-sm">O Super Gateway Central: CGIBS</h4>
+            <p class="text-xs text-gray-500 mt-1">As Secretarias de Estado da Fazenda (SEFAZ locais) ganham uma governança unificada. O "Comitê Gestor do IBS" funcionará como um Load Balancer / Hub Central para padronização e regulação digital nacional da fatia de impostos de Estados/Prefeituras.</p>
+          </div>
+
+          <div class="border-l-2 border-purple-400 pl-3">
+            <h4 class="text-purple-800 font-bold text-sm">Split Payment</h4>
+            <p class="text-xs text-gray-500 mt-1">A cobrança de imposto deixa de ser feita após 30 dias na contabilidade e se torna uma chamada de WebHook/API paralela descontada <strong>exatamente no momento da transação magnética do cartão de crédito / PIX</strong>.</p>
+          </div>
+        </div>
+
+        <div class="mt-4 pt-2 border-t border-gray-100">
+          <button [routerLink]="['/arquitetura-split-payment']" class="text-xs font-semibold text-purple-700 flex items-center hover:text-purple-900 group">
+            Ver Diagrama e Responsabilidades do Split Payment
+            <svg class="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white dark:bg-slate-800 dark:text-gray-300 dark:border-slate-700 rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col transition-all hover:shadow-md hover:border-orange-300">
+      <div class="bg-orange-500 px-5 py-3 border-b border-orange-600">
+        <h3 class="text-lg font-bold text-white flex items-center">
+          <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          Módulo 4: PLP 108 + Simples Nacional
+        </h3>
+      </div>
+      <div class="p-5 flex-1 flex flex-col">
+        <p class="text-sm text-gray-600 mb-4">Adições satélites que geram pequenas bolhas de regras e ifs-elses nas plataformas (PLP 108/2024).</p>
+
+        <div class="flex-1 grid grid-cols-2 gap-3">
+          <div class="bg-orange-50 rounded-lg p-3">
+             <span class="text-orange-800 font-bold block text-sm">ITCMD (Progressivo)</span>
+             <p class="text-[10px] text-orange-700 mt-1">Imposto de Herança não é mais alíquota fixa. Algoritmo agora varia em "degraus" baseado no volume de renda. Exige matriz de cálculo.</p>
+          </div>
+          <div class="bg-orange-50 rounded-lg p-3">
+             <span class="text-orange-800 font-bold block text-sm">Simples Nacional</span>
+             <p class="text-[10px] text-orange-700 mt-1">Pequenas empresas podem manter regime DAS unificado ou realizar <code class="bg-orange-200 rounded px-1">OptOut(IBS/CBS)</code> para repassar créditos totais na cascata B2B.</p>
+          </div>
+          <div class="col-span-2 bg-orange-50 rounded-lg p-3 border border-orange-200">
+             <span class="text-orange-900 font-bold block text-sm">A "Engine" do Cashback</span>
+             <p class="text-xs text-orange-800 mt-1 mb-2">População carente tem tributo devolvido se (e somente se) o Checkout do seu E-commerce e PDV forçarem a digitação de um CPF perfeitamente válido.</p>
+             <button [routerLink]="['/leis-complementares']" class="text-xs font-semibold uppercase text-orange-600 hover:text-orange-900">Ver regras da LC de Cashback →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>

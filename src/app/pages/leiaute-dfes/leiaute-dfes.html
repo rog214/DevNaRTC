@@ -1,0 +1,102 @@
+<div class="prose-page">
+
+  <div class="page-heading">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Leiaute dos Documentos Fiscais Eletrônicos</h2>
+    <p class="text-gray-500 dark:text-slate-400">
+      Como o XML das notas fiscais muda no período híbrido, detalhando a estrutura do DTO, os novos grupos de imposto e a inclusão do Split Payment na tag &lt;pag&gt;.
+    </p>
+  </div>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">O período híbrido (2026 a 2032)</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A legislação da Reforma Tributária estabelece uma transição na qual os dois regimes coexistem no mesmo documento fiscal. Uma NF-e emitida durante esse período precisa carregar simultaneamente os grupos de ICMS, PIS e COFINS junto com os novos grupos de IBS, CBS e Imposto Seletivo.
+    </p>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A estrutura oficial do ENCAT separa os tributos em nós distintos no item, isolando a tag
+      <code class="bg-gray-100 dark:bg-slate-900 text-blue-700 dark:text-blue-400 px-1.5 py-0.5 rounded text-sm">legado</code> da tag
+      <code class="bg-gray-100 dark:bg-slate-900 text-blue-700 dark:text-blue-400 px-1.5 py-0.5 rounded text-sm">iva</code>.
+      Desse modo, os sistemas legados não são impactados e a estrutura do IVA Dual fica contida em seu próprio grupo de tags.
+    </p>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Exemplo de JSON/XML</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      O visualizador abaixo mostra a estrutura completa de uma nota no período de transição. Os valores de IBS (0,1%) e CBS (0,9%) são correspondentes à fase de testes do sandbox iniciada em 2026.
+    </p>
+
+    <div class="border border-amber-200 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/20 px-4 py-2.5 rounded-lg text-sm text-amber-800 dark:text-amber-200">
+      Alíquotas de teste aplicadas no sandbox, conforme as diretrizes do regulamento da reforma. As definitivas serão fixadas em Resolução do Senado.
+    </div>
+
+    <app-json-crack-visualizer [dados]="exemploDocumentoHibrido"></app-json-crack-visualizer>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Grupos de XML no nível do item</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      Os novos tributos entram no grupo <code class="bg-gray-100 dark:bg-slate-900 px-1.5 py-0.5 rounded text-sm">&lt;imposto&gt;</code> do item. De acordo com as notas técnicas de 2025/2026, a base de cálculo do IBS e da CBS já inclui o valor do Imposto Seletivo quando este incidir.
+    </p>
+
+    <pre class="bg-slate-950 border border-slate-800 text-blue-200 p-5 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed"><code>&lt;imposto&gt;
+  &lt;IS&gt;
+    &lt;cstIS&gt;00&lt;/cstIS&gt;
+    &lt;vBCIS&gt;100.00&lt;/vBCIS&gt;
+    &lt;pIS&gt;5.00&lt;/pIS&gt;
+    &lt;vIS&gt;5.00&lt;/vIS&gt;
+  &lt;/IS&gt;
+  &lt;IBS&gt;
+    &lt;cstIBS&gt;00&lt;/cstIBS&gt;
+    &lt;vBCIBS&gt;105.00&lt;/vBCIBS&gt;
+    &lt;pIBS&gt;0.10&lt;/pIBS&gt;
+    &lt;vIBS&gt;0.11&lt;/vIBS&gt;
+  &lt;/IBS&gt;
+  &lt;CBS&gt;
+    &lt;cstCBS&gt;00&lt;/cstCBS&gt;
+    &lt;vBCCBS&gt;105.00&lt;/vBCCBS&gt;
+    &lt;pCBS&gt;0.90&lt;/pCBS&gt;
+    &lt;vCBS&gt;0.95&lt;/vCBS&gt;
+  &lt;/CBS&gt;
+&lt;/imposto&gt;</code></pre>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Split Payment no grupo &lt;pag&gt;</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      O grupo de pagamento desempenha papel estratégico. É nele que o processador financeiro localiza o detalhamento necessário para reter e repassar o IBS e a CBS automaticamente no momento da liquidação bancária.
+    </p>
+
+    <pre class="bg-slate-950 border border-slate-800 text-blue-200 p-5 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed"><code>&lt;pag&gt;
+  &lt;detPag&gt;
+    &lt;tPag&gt;17&lt;/tPag&gt;
+    &lt;vPag&gt;106.06&lt;/vPag&gt;
+    &lt;split&gt;
+      &lt;CNPJGoverno&gt;00000000000191&lt;/CNPJGoverno&gt;
+      &lt;vSplitIBS&gt;0.11&lt;/vSplitIBS&gt;
+      &lt;vSplitCBS&gt;0.95&lt;/vSplitCBS&gt;
+    &lt;/split&gt;
+  &lt;/detPag&gt;
+&lt;/pag&gt;</code></pre>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Serviços com NFS-e de Padrão Nacional</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A antiga diversidade de layouts de notas de serviço municipais é eliminada. Com a unificação da reforma, as prestações de serviços passam a seguir o mesmo leiaute nacional simplificado para cálculo e escrituração do IVA.
+    </p>
+
+    <pre class="bg-slate-950 border border-slate-800 text-purple-200 p-5 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed"><code>&lt;Servico&gt;
+  &lt;Valores&gt;
+    &lt;ValorServicos&gt;500.00&lt;/ValorServicos&gt;
+    &lt;BaseCalculo&gt;500.00&lt;/BaseCalculo&gt;
+    &lt;AliquotaIBS&gt;0.10&lt;/AliquotaIBS&gt;
+    &lt;AliquotaCBS&gt;0.90&lt;/AliquotaCBS&gt;
+    &lt;ValorIBS&gt;0.50&lt;/ValorIBS&gt;
+    &lt;ValorCBS&gt;4.50&lt;/ValorCBS&gt;
+  &lt;/Valores&gt;
+  &lt;Discriminacao&gt;Desenvolvimento de Software, integração com a API do IVA-Dual&lt;/Discriminacao&gt;
+&lt;/Servico&gt;</code></pre>
+  </section>
+
+</div>

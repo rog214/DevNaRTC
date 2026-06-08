@@ -1,0 +1,87 @@
+<div class="prose-page">
+
+  <div class="page-heading">
+    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-1">Leis Complementares na Prática</h2>
+    <p class="text-gray-500 dark:text-slate-400">
+      O que a regulamentação aprovada exige das aplicações, como cronograma estruturado, Split Payment obrigatório, regimes de alíquotas reduzidas e operacionalização do cashback.
+    </p>
+  </div>
+
+  <section class="space-y-5">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Cronograma: a natureza experimental das alíquotas de 2026</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A regulamentação geral estabelece o ano de 2026 como uma fase de testes de arrecadação homologatória, na qual taxas simbólicas do novo imposto coexistem com a cobrança integral dos tributos legados.
+    </p>
+
+    <div class="flex gap-4">
+      <div class="flex-1 bg-yellow-50 dark:bg-yellow-950/20 rounded-xl p-4 border border-yellow-200 dark:border-yellow-900/40">
+        <p class="text-xs text-yellow-600 dark:text-yellow-400 font-mono uppercase tracking-wider mb-1">Federal Sandbox</p>
+        <p class="text-2xl font-bold text-yellow-800 dark:text-yellow-200">0,9% <span class="text-sm font-normal text-yellow-600 dark:text-yellow-400">CBS</span></p>
+      </div>
+      <div class="flex-1 bg-emerald-50 dark:bg-emerald-950/20 rounded-xl p-4 border border-emerald-200 dark:border-emerald-900/40">
+        <p class="text-xs text-emerald-600 dark:text-emerald-400 font-mono uppercase tracking-wider mb-1">Regional Sandbox</p>
+        <p class="text-2xl font-bold text-emerald-800 dark:text-emerald-200">0,1% <span class="text-sm font-normal text-emerald-600 dark:text-emerald-400">IBS</span></p>
+      </div>
+    </div>
+
+    <div class="callout-blue">
+      As alíquotas definitivas de referência, projetadas na casa de 26,5% somadas, serão oficializadas por Resolução do Senado Federal após as manifestações do Comitê Gestor do IBS e da Receita Federal.
+    </div>
+
+    <div class="border border-gray-200 dark:border-slate-800 rounded-xl p-4">
+      <p class="font-medium text-gray-900 dark:text-white text-sm mb-1">Aviso arquitetural: evite fixar alíquotas diretamente no código</p>
+      <p class="text-sm text-gray-600 dark:text-slate-400">
+        Os percentuais do IVA serão elevados gradativamente de 2027 a 2032 ao mesmo tempo em que a carga dos tributos anteriores é reduzida. O motor fiscal deve ler os valores vigentes de forma dinâmica, utilizando a data de emissão como índice de consulta temporal.
+      </p>
+    </div>
+  </section>
+
+  <section class="space-y-5">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Split Payment: as exigências do modelo de liquidação</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A nova legislação exige que o acerto dos impostos ocorra diretamente na liquidação financeira do pagamento eletrônico. A aplicação e o ponto de venda devem repassar as chaves e valores dos tributos nas transações para permitir que o intermediador financeiro faça a retenção automática do IBS e da CBS.
+    </p>
+
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-slate-800">
+      <table class="min-w-full text-sm">
+        <thead class="bg-gray-50 dark:bg-slate-900/80">
+          <tr>
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-xs uppercase tracking-wider">Ator</th>
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-xs uppercase tracking-wider">Responsabilidade</th>
+            <th class="text-left px-4 py-3 font-semibold text-gray-700 dark:text-slate-300 text-xs uppercase tracking-wider">Penalidade</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200 dark:divide-slate-800">
+          <tr>
+            <td class="px-4 py-3.5 font-medium text-gray-900 dark:text-white whitespace-nowrap">Sistemas de faturamento</td>
+            <td class="px-4 py-3.5 text-gray-600 dark:text-slate-400">Mensurar os tributos devidos e enviar as chaves fiscais de validação com o detalhamento das retenções do IBS e CBS ao adquirente.</td>
+            <td class="px-4 py-3.5 text-red-600 dark:text-red-400 font-medium whitespace-nowrap">Notificação fiscal</td>
+          </tr>
+          <tr class="bg-gray-50/50 dark:bg-slate-800/30">
+            <td class="px-4 py-3.5 font-medium text-gray-900 dark:text-white whitespace-nowrap">Banco e Adquirente</td>
+            <td class="px-4 py-3.5 text-gray-600 dark:text-slate-400">Verificar a existência e consistência das chaves fiscais antes de direcionar a fatia tributária às contas oficiais do Tesouro e do Comitê Gestor.</td>
+            <td class="px-4 py-3.5 text-red-600 dark:text-red-400 font-medium whitespace-nowrap">Arrecadação solidária</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="space-y-5">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Regimes de redução: faixas de alíquotas de 30%, 60% e isenção total</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      IBS e CBS compartilham a mesma base de cálculo. Categorias prioritárias, como saúde e educação, recebem reduções de alíquota padronizadas nacionalmente, sem dependência de matrizes ou regulamentos por unidade federativa. O cadastro de produto identifica o regime do item através de mapeamento e o motor aplica o redutor matemático.
+    </p>
+  </section>
+
+  <section class="space-y-4">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Cashback automático: o CPF do cidadão como gatilho</h3>
+    <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      A operacionalização da devolução de tributos ao consumidor de baixa renda exige a captura sistemática do CPF no momento da compra. Sem esta identificação, os órgãos do governo não conseguem quantificar e creditar a devolução.
+    </p>
+    <div class="callout-orange">
+      A interface do caixa de vendas deve validar a consistência do CPF antes de autorizar o envio do documento fiscal. A ausência desse fluxo impossibilita o cumprimento da devolução social obrigatória prevista na reforma.
+    </div>
+  </section>
+
+</div>

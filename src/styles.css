@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-gray-50 dark:bg-slate-950 text-gray-900 dark:text-slate-100 antialiased;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  ::selection {
+    @apply bg-blue-100 dark:bg-blue-900/60 text-blue-900 dark:text-blue-100;
+  }
+
+  code {
+    @apply font-mono;
+  }
+}
+
+@layer utilities {
+  .prose-page {
+    @apply max-w-3xl mx-auto px-6 py-12 space-y-14;
+  }
+
+  .page-heading {
+    @apply border-b border-gray-200 dark:border-slate-800 pb-6 mb-2;
+  }
+
+  .section-label {
+    @apply text-xs font-mono uppercase tracking-widest mb-2 inline-block;
+  }
+
+  .callout {
+    @apply border-l-2 pl-4 py-3 rounded-r-lg text-sm leading-relaxed;
+  }
+
+  .callout-amber {
+    @apply callout border-amber-400 bg-amber-50 dark:bg-amber-950/20 text-amber-900 dark:text-amber-200;
+  }
+
+  .callout-red {
+    @apply callout border-red-400 bg-red-50 dark:bg-red-950/20 text-red-900 dark:text-red-200;
+  }
+
+  .callout-blue {
+    @apply callout border-blue-400 bg-blue-50 dark:bg-blue-950/20 text-blue-900 dark:text-blue-200;
+  }
+
+  .callout-orange {
+    @apply callout border-orange-400 bg-orange-50 dark:bg-orange-950/20 text-orange-900 dark:text-orange-200;
+  }
+
+  .code-block {
+    @apply rounded-xl overflow-hidden border border-gray-800 bg-[#0d0d14];
+  }
+
+  .code-block-header {
+    @apply flex items-center gap-3 px-4 py-3 bg-[#13131f] border-b border-gray-800;
+  }
+
+  .code-block-dots {
+    @apply flex gap-1.5;
+  }
+
+  .code-block-pre {
+    @apply p-5 text-sm font-mono overflow-x-auto text-gray-300 leading-relaxed;
+  }
+
+  .nav-card {
+    @apply block p-5 bg-white dark:bg-slate-900 rounded-xl border border-gray-200 dark:border-slate-800 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-sm transition-all duration-200;
+  }
+
+  .nav-card-label {
+    @apply text-xs font-mono text-gray-400 dark:text-slate-500 mb-2;
+  }
+
+  .nav-card-title {
+    @apply font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-1;
+  }
+
+  .nav-card-desc {
+    @apply text-sm text-gray-500 dark:text-slate-400;
+  }
+}
